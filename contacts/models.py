@@ -22,9 +22,15 @@ class Contact(models.Model):
     state = USStateField(null=True, blank=True)
     zip_code = USZipCodeField(null=True, blank=True)
 
+    def __str__(self):
+	    return self.name
+
 
 class Note(models.Model):
     note_content = models.TextField(max_length=500)
     note_date = models.DateTimeField(auto_now_add=True)
     contact = models.ForeignKey(to='Contact', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.note_content
     
