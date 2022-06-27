@@ -1,6 +1,4 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <h1>All Contacts</h1>
 
 <p><a href="{% url 'add_contact' %}">Add New Contact</a></p>
@@ -14,10 +12,9 @@
       <div class="pr2"><i class="icofont-location-pin"></i></div>
       <div>
         {{ contact.address_1 }}<br />
-        {% if contact.address_2 %}
-          {{ contact.address_2 }}<br />
-        {% endif %}
-        {{ contact.city }}, {{ contact.state }} {{ contact.zip_code }}
+        {% if contact.address_2 %} {{ contact.address_2 }}<br />
+        {% endif %} {{ contact.city }}, {{ contact.state }}
+        <span> {{ contact.zip_code }} </span>
       </div>
     </div>
 
@@ -26,9 +23,11 @@
       <div class="pr2"><i class="icofont-phone"></i></div>
       <div>{{ contact.phone_number }}</div>
     </div>
-    {% endif %}
-
-    {% if contact.email %}
+    {% endif %} {% if contact.birthdate %}
+    <div class="flex">
+      <div>{{ contact.birthdate}}</div>
+    </div>
+    {% endif %} {% if contact.email %}
     <div class="flex">
       <div class="pr2"><i class="icofont-ui-email"></i></div>
       <div>{{ contact.email }}</div>
@@ -36,10 +35,12 @@
     {% endif %}
 
     <p>
-      <a href="{% url 'edit_contact' pk=contact.pk %}">Edit Contact</a><br>    
-      <a class="red" href="{% url 'delete_contact' pk=contact.pk %}">Delete Contact</a>
+      <a href="{% url 'edit_contact' pk=contact.pk %}">Edit Contact</a><br />
+      <a class="red" href="{% url 'delete_contact' pk=contact.pk %}"
+        >Delete Contact</a
+      >
     </p>
   </div>
   {% endfor %}
-</div>  
+</div>
 {% endblock %}
